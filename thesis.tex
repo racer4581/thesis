@@ -1,0 +1,66 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%		Based on EDOC Template 2011
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\input{front/settings_general}
+\input{front/settings_custom}  % Custom packages, etc... go in this file!
+\input{defs}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% HEAD: Book-Begin
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\frontmatter
+\input{front/titlepage}
+\ifdraft{
+	This document is a DRAFT. Dedication, acknowledgements, abstract, table of contents, list of
+	figures, and list of tables will be displayed in the final version.
+}
+{
+	%\include{front/dedication}
+	\input{front/acknowledgements}
+	\include{front/abstract}
+
+	\begingroup
+	\hypersetup{linkcolor=black}
+	\tableofcontents
+	\addcontentsline{toc}{chapter}{List of figures} % adds an entry to the table of contents
+	\listoffigures
+	\addcontentsline{toc}{chapter}{List of tables} % adds an entry to the table of contents
+	\listoftables
+	\endgroup
+}
+% your list of symbols here, if needed.
+
+
+% space before each new paragraph according to the template guidelines.
+%(needs to be after titlepage and frontmatter to keep the table of contents lists short)
+\setlength{\parskip}{1em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% MAIN: The chapters of the thesis
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+\include{main/introduction}
+\include{main/problem_description}
+\include{main/methodology}
+\include{main/hyperparam_learning}
+\include{main/results}
+\include{main/conclusion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% TAIL: Bibliography, Appendix, ...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{back/appendix}
+\include{back/biblio}
+% Add your glossary here
+% Add your index here
+% Photographic credits (list of pictures&images that have been used with names of the person holding the copyright for them)
+\include{back/declaration_originality}
+
+\end{document}

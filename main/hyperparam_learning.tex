@@ -1,0 +1,258 @@
+\chapter{Hyperparameter distribution learning}
+	\label{ch:learn}
+	[Briefly justify]
+
+
+	\subsection{Parametric vs non-parametric density estimation}
+
+	Due to the large number of configurations and dimensions to test, a compact representation of
+	the hyperparameter space is preferred. Estimation of parametric distributions is convenient
+	because it allows for this compactness and because usually closed-form solutions for maximum
+	likelihood fitting of their parameters exist. A compact representation of the hyperparameter
+	distributions is especially desirable if later use of such learned distributions (e.g.~using the
+	learned distribution as a prior for a new optimization) is intended.
+	
+	Non-parametric alternatives like Kernel Density Estimation
+	\cite{rosenblatt1956kde}, \cite{parzen1962kde} keep too much information in memory, are cumbersome to
+	encode and store for later use, and depend on heuristics and rules of thumb to decide parameter
+	values such as the kernel bandwidth, and are therefore not suitable for the automatic approach
+	presented in this work.
+
+	\subsection{Parametric distribution learning}
+
+	The main problem when using parametric estimation comes from the choice of the distribution to
+	model the target random variable. One simple and generally good enough strategy is to use a
+	Gaussian Mixture Model (GMM). The goodness of fit of a sample to a GMM depends in turn on the
+	number of components chosen, since a large number of components will overfit the data, and
+	likewise an overly simplistic model with few components will disregard local properties of the
+	underlying distribution (underfitting).
+
+	In order to find a trade-off between the GMM complexity and predictive power, the proposed idea
+	is to measure the \emph{fidelity} of the mixture model (i.e.~a quantitative estimate of its
+	ability to describe the associated data, as described in \cite{declercq2007online,
+	declercq2008online} for the \emph{uncertain Gaussian model}), and to define a fidelity threshold
+	below which a mixture model is considered overly simplistic. Mixture models will be updated upon
+	arrival of new observations and simplified if the above condition holds.
+
+	\subsubsection{Exploration enforcement}
+	At early stages of the learning process, it is very likely that the learned hyperparameter
+	distribution does not fit the true distribution. Because an initial prior distribution is
+	specified for all hyperparameters (as described in section \ref{sec:hyperparam_dist}), which
+	assumes little about the true distribution, it makes sense to start off by retrieving and
+	evaluating hyperparameter values drawn from the prior distribution.
+
+	Furthermore, even in later stages of the learning process, new local properties of the
+	true distribution may be discovered, that would render the current mixture model invalid or less
+	fit to describe the observed data. This would suggest that more exploration of the
+	hyperparameter space (more sampling from the prior) is needed.
+
+	Since there are two distributions describing the hyperparameter distribution, the learned
+	distribution is not trustworthy for prediction at early stages, and exploration of a wide range
+	of values for the hyperparameter is convenient at some points, sampling from both distributions
+	is proposed. The main idea is to sample the prior distribution more frequently when the learned
+	mixture model does not fit the observations well, and progressively "let go" of the prior as the
+	predictions from the learned mixture model do fit the new observations.
+
+	The $p$-value obtained from the \emph{one-sample Kolmogorov-Smirnov test} (K-S test) of new
+	observations against the learned distribution is used here to measure the goodness of fit, and
+	deviations of the new observations from the learned distribution beyond an $\alpha$ value are
+	penalized. This means that when disagreements between prediction and observations happen, the
+	frequency with which the prior distribution is used for sampling new hyperparameter values
+	increases, and likewise when the predictions and observations agree (within $\alpha$ tolerance),
+	more weight (relative sampling frequency) is given to the learned distribution, proportional to
+	the $p$-value.
+
+	\subsubsection{Learned model update}
+	Everytime a hyperparameter value is sampled and evaluated, its evaluation is added as a new
+	component to the mixture model, by trivially combining the existing distributions with the new
+	one.
+
+	If at any given point in time $t$ the mixture model is expressed as a set of $N$ weighted
+	Gaussian distributions:
+	\begin{equation}
+		p^{(t)}(x) =
+			\frac
+			{\sum_{i=1}^N \pi_i^{(t)}\,g(x; \mu_i^{(t)}, \sigma_i^{(t)})}
+			{\sum_{i=1}^N \pi_i^{(t)}}
+	\end{equation}
+
+	Then the new mixture model for $t+1$ is given by:
+	\begin{equation}
+		\label{eq:merge_gaussians}
+		p^{(t+1)}(x) =
+		\frac
+		{\left( \sum_{i=1}^N \pi_i^{(t)} \, g(x; \mu_i^{(t)}, \sigma_i^{(t)}) \right) +
+		\pi^{(t+1)} \, g(x; \mu^{(t+1)}, \sigma^{(t+1)})}
+		{\left(\sum_{i=1}^N \pi_i^{(t)} \right) + \pi^{(t+1)}}
+	\end{equation}
+
+	\subsubsection{Learned model simplification}
+	Adding new components to the GMM everytime a new observation arrives hinders all the advantages
+	of using parametric estimation. If possible, merging similar components of the GMM into one
+	should be done, in order to simplify the mixture model.
+
+	As proposed in \cite{declercq2008online}, two Gaussian distributions (two components of the GMM in
+	this case) can be merged without significant loss of predictive power if the merged distribution
+	has a \emph{fidelity} $\lambda$ close to 1, otherwise, both components must be kept to
+	properly describe the distribution of the data.
+
+	The distance between the distribution to test, and the data to which it should fit, is given by:
+	\begin{equation}
+		D = \frac 1 {|I|} \int_I \left| \hat{F}(x) - F_n(x)\right| dx
+	\end{equation}
+
+	Declercq and Piater assume such distances as Gaussian distributed, and define the
+	\emph{fidelity} $\lambda$ as:
+	\begin{equation}
+		\lambda = e^{\frac{-D^2}{T_D^2}}
+	\end{equation}
+
+	With $T_D^2$ a parameter that controls how much deviation from the observations is allowed and
+	hence how relaxed the computation is about considering the merged Gaussian as an acceptable
+	representation of the two merged components.
+
+	Two Gaussian components $G_i$ and $G_j$ can be merged into one by applying the following
+	procedure:
+
+	\begin{align}
+		\pi = & \pi_i + \pi_j\\
+		\mu = & \frac 1 \pi \left( \pi_i \mu_i + \pi_j \mu_j\right)\\
+		\sigma = & \frac {\pi_i} {\pi} \left( \sigma_i + (\mu_i - \mu)^2 \right) + 
+			      \frac {\pi_j} \pi \left( \sigma_j + (\mu_j - \mu)^2 \right) \\
+				  G(x) = & \mathcal{N}(\mu, \sigma)
+				  \label{eq:simplify_gaussians}
+	\end{align}
+
+	\subsection{The distribution learning algorithm}
+
+	The hyperparameter distribution learning process is summarized as follows:
+
+	\begin{algorithm}[here]
+		\begin{algorithmic}[1]
+			\Procedure{HyperparameterEstimation}{prior, $\alpha$, penalty}
+			\State $w_{prior} \gets 1$
+			\State $w_{learned} \gets 0$
+			\While {stopping condition not met}  \Comment{Timeout reached, manual user abort,
+			\ldots}
+				\State $r \gets $ random$(0,1)$
+				\If {$r \leq w_{prior}$}
+					\State distribution $\gets$ prior
+				\Else
+					\State distribution $\gets$ learned
+				\EndIf
+				\State value $\gets$ sample(distribution)
+				\If {K-S(value, learned) > $\alpha$} \Comment{Assess goodness-of-fit}
+					\State $w_{learned} \gets$ decrease$(w_{learned})$
+					\State $w_{prior} \gets (1 - w_{learned})$ \Comment{Increase prior sample frequency}
+				\Else
+					\State $w_{prior} \gets$ decrease$(w_{prior})$
+					\State $w_{learner} \gets (1 - w_{prior})$ \Comment{Decrease prior sample frequency}
+				\EndIf
+				\State learned $\gets$ combine(value, learned)  \Comment{Apply equation
+				\ref{eq:merge_gaussians}}
+				\State learned $\gets$ simplify(learned)  \Comment{Apply equation
+				\ref{eq:simplify_gaussians}}
+			\EndWhile
+			\EndProcedure
+		\end{algorithmic}
+		\label{algo:learn_hyperparameter}
+		\caption{Simultaneous hyperparameter learning and sampling}
+	\end{algorithm}
+
+\chapter{Hyperparameter distribution learning}
+	Applying a SML algorithm on different sets of data requires, in general, different values of the
+	hyperparameters to achieve the best performance. However, there are certain ranges of values
+	that are harmful in all but some pathological cases, and likewise, some regions of the
+	hyperparameter space produce configurations that consistently perform well when applied on
+	different types of data, and hence are worth trying when searching for good models.
+
+	This suggest that it might be helpful to guide the hyperparameter optimization by making use of
+	some description of the hyperparameter space that gives some hints about what values a given
+	hyperparameter should and should not take. Starting the sampling of hyperparameter values from a
+	hyperparameter-specific {\bf general prior distribution} that has high density around regions of
+	the hyperparameter space known to perform well, and low or no density around regions known to
+	harm the prediction of the SML algorithm, will help the optimization process to discover more
+	quickly where the local optima might be, and what regions of the hyperparameter space it is safe
+	to avoid.
+
+	\section{Learning the general prior distribution}
+	A training process is required to learn the general prior distribution for a given
+	hyperparameter. The general prior distribution should be learned from evaluations of the
+	hyperparameter on different sets of data, so as not to overrepresent one single problem.
+
+	The chosen representation for the general prior distribution is a Gaussian Mixture Model, which
+	is convenient for encoding multimodal distributions and to which it is not very expensive to fit
+	data. Since the true probability of a hyperparameter value being the optimal is not known, the
+	performance index of models containing such value is used as a surrogate for the estimation of
+	this probability, since the performance index measures the quality of the prediction. 
+	The implementation of the learning process is a Montecarlo method that accepts or rejects
+	values of the hyperparameters according to their performance indices, summarized in algorithm
+	\ref{alg:general_prior}.
+
+	\begin{algorithm}[here]
+		\begin{algorithmic}
+			\Function{learn\_general\_prior}{training\_datasets, threshold}
+				\State training\_values $\gets \emptyset$
+				\State general\_prior $\gets$ initial GMM
+				\For {dataset $D$ in a group of training datasets}
+					\While {convergence criterion not met}
+						\State Sample a value $\lambda$ for the hyperparameter from a uniform
+						distribution
+						\State score $\gets$ performance\_index($\lambda, D$)
+						\If {random$(0,1) \leq$ score}
+							\State append(training\_values, $\lambda$)
+						\EndIf
+						\State general\_prior $\gets$ fit a GMM to training\_values using EM algorithm
+						\State temp\_prior $\gets$ fit a more complex GMM to training\_values
+						using EM algorithm
+						\If {relative likelihood of temp\_prior with respect to general\_prior $>$
+						threshold}
+							\State general\_prior $\gets$ temp\_prior
+						\Else
+							\State simpler\_prior $\gets$ fit a simpler GMM to training\_values
+							\If {$AIC($simpler\_prior$) \leq AIC($general\_prior$)$}
+								\State general\_prior $\gets$ simple\_prior
+							\EndIf
+						\EndIf
+					\EndWhile
+				\EndFor
+				\State
+				\Return {general\_prior}
+			\EndFunction
+		\end{algorithmic}
+		\caption{General prior distribution learning}
+		\label{alg:general_prior}
+	\end{algorithm}
+
+	The algorithm evaluates at each iteration if a more complex GMMs (mixtures of more
+	components) fits the data significantly better than the current GMM, by calculating the
+	\emph{relative likelihood} of the current, simpler model with respect to the more complex one.
+	The relative likelihood of the current model with respect to the more complex one is the
+	probability that using the current model minimizes the information loss (fits better the data).
+	Only when such probability is very low the more complex model is adopted. This ensures that the
+	complexity of the GMM representing the data only increases when the simpler model does not fit
+	the data well. Likewise, if a simpler GMM fits the data better, it is adopted (without imposing
+	a threshold in this case).
+
+	\section{Using the general prior for hyperparameter optimization}
+
+	The distribution returned by algorithm \ref{alg:general_prior} is a rough description of the
+	quality of the hyperparameter in different regions of the hyperparameter space, and can be used
+	as a prior for starting to sample candidate values of the hyperparameter to evaluate on a
+	specific dataset.
+
+	Since the general prior contains hints of where, in general, high and low-scoring regions of the
+	hyperparameter space are, but is not guaranteed to fit the true distribution of scores for the
+	specific data set, further exploration of other regions of the hyperparameter space not
+	favored by the general prior might be necessary. The ideal case would be that the general prior
+	already fits the true underlying distribution of scores for the specific dataset, in which case
+	it would suffice to sample values from the general prior, and assume that high-scoring values
+	will be retrieved often. As this is seldom the case, an alternative way to "fix" the prior must
+	be used.
+
+	To achieve this, an alternative prior can be used when there is less confidence that the general
+	prior fits the data. Uniform priors are useful for this, since they do not encode assumptions of
+	the distribution and therefore promote exploration of the hyperparameter space. Using a general
+	prior helps speed up the optimization process because it samples values that are expected to
+	perform well, as opposite to using a uniform prior (random search) which relies only in chance
+	to find good hyperparameter values.
