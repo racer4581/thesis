@@ -40,10 +40,10 @@
 	The chosen representation for the general prior distribution is a Gaussian Mixture Model, which
 	is convenient for encoding multimodal distributions and to which it is not very expensive to fit
 	data. Since the true probability of a hyperparameter value being the optimal is not known, the
-	performance index of models containing such value is used as a surrogate for the estimation of
+	performance index of models containing such values is used as a surrogate for the estimation of
 	this probability, as it measures the quality of the prediction. 
-	The implementation of the learning process is a Montecarlo method that accepts or rejects
-	values of the hyperparameters according to their performance indices, summarized in algorithm
+	The implementation of the learning process is a Monte Carlo method that accepts or rejects
+	values of the hyperparameters according to their performance indices, summarized in Algorithm
 	\ref{alg:general_prior}.
 
 	\begin{algorithm}[here]
@@ -69,13 +69,13 @@
 		\label{alg:general_prior}
 	\end{algorithm}
 
-	The algorithm evaluates at each iteration if a more complex GMMs (more Gaussian components) fits
+	The algorithm evaluates at each iteration if a more complex GMM (more Gaussian components) fits
 	the data significantly better than the current GMM.  In order to find a trade-off between the
 	GMM complexity and predictive power, the proposed idea is to measure the \emph{fidelity} of the
 	mixture model (i.e.~a quantitative estimate of its ability to describe the associated data, as
 	described in \cite{declercq2007online, declercq2008online} for the \emph{uncertain Gaussian
 	model}), and to define a fidelity threshold below which a mixture model is considered overly
-	simplistic. Mixture models will be updated upon arrival of new observations and simplified if
+	simplistic. Mixture models are updated upon arrival of new observations and simplified if
 	the above condition holds.
 
 	\subsubsection{Learned model update}
@@ -141,7 +141,7 @@
 	
 	\section{Using the general prior for hyperparameter optimization}
 
-	The distribution returned by algorithm \ref{alg:general_prior} is a rough description of the
+	The distribution returned by Algorithm \ref{alg:general_prior} is a rough description of the
 	quality of the hyperparameter in different regions of the hyperparameter space. It can be used
 	as a prior distribution for sampling candidate hyperparameter values to evaluate on a
 	specific dataset.

@@ -616,15 +616,21 @@ parameter setting if needed.
 
 \subsection{Statistical analysis}
 
-Given a set of models, the distribution of their scores on different versions of the hold out
+Given a set of models, the distribution of their scores on different samples drawn from of the hold out
 dataset is studied to determine which model offers enough evidence to be considered the best one.
 
 The hierarchical structure of the hyperparameter space groups models that share the same signature
-together, at different levels. Statistical analysis is performed at all levels of the
+together, at different levels. A statistical analysis is performed at all levels of the
 hyperparameter space, starting from the configurations that differ only on their numerical
 hyperparameters, and promoting good models to be compared to others at the immediately broader
 level of aggregation (the category immediately above in the tree) repeatedly up to the highest level
 in the hierarchy.
+
+The aim of the statistical analysis in the context of this work is to compare the distributions of
+performance indices for all candidate models with respect to the highest-scoring one, and discard
+all the candidate models with strong statistical evidence that they perform worse. The models kept
+are {\bf statistically indistinguishable} from the best one. The overall procedure is based on
+\cite{pizarro2002mct} and \cite{demsar2006mct} for significance testing.
 
 Each model is used for prediction on the hold out dataset several times by using $m$ repetitions of
 $k$-fold cross-validation ($m=3,~k=10$ by default). A multiple comparison statistical test (MCT) is
@@ -642,12 +648,6 @@ The MCTs determine, up to a certain probability $\alpha$, whether there are sign
 group of distributions or not, but do not tell the actual distributions that show differences. A
 \emph{post-hoc} test is required in order to find which distributions differ. Both parametric and
 non-parametric post-hoc tests exist.
-
-The aim of the statistical analysis in the context of this work is to compare the distributions of
-performance indices for all candidate models with respect to the highest-scoring one, and discard
-all the candidate models with strong statistical evidence that they perform worse. The models kept
-are {\bf statistically indistinguishable} from the best one. The overall procedure is based on
-\cite{pizarro2002mct} and \cite{demsar2006mct} for significance testing.
 
 The chosen \emph{parametric} MCT is the {\bf one-way ANOVA test} \cite{fisher1925statistical}, which is a
 generalization of the $t$-test that corrects for accumulated errors when performing comparisons
@@ -686,8 +686,7 @@ significantly indistinguishable models to select.
 \subsection{Ranking criteria}
 The statistical analysis reduces the number of candidate models to those that statistically perform
 as good as the best, according to their performance indices. Other criteria are evaluated on the
-selected models in order to compare them and decide which one is the best from a group of models
-statistically indistinguishable from the best.
+selected models in order to compare them and decide which one is the best.
 
 The criteria used here are described in table \ref{tab:ranking}. Each criterion is evaluated for each
 candidate model, and used for ranking them. Fractional rankings (to account for ties) are weighted by
@@ -747,7 +746,7 @@ according to this compound ranking is selected.
 %
 
 The statistical test applied to the model scores compares the mean and spread of the scores
-obtained by a single model against all other candidate models. The test is summarized in algorithm
+obtained by a single model against all other candidate models. The test is summarized in Algorithm
 \ref{alg:statistical_test}.
 
 \begin{algorithm}
@@ -855,8 +854,7 @@ the result of the model selection stage.
 \section{Implementation details}
 
 The actual implementation of all the components described in this chapter was developed as a program
-that reads datasets from different text formats (only \texttt{.arff} files are supported at the
-moment), and applies a set of different SML algoritms on the read data.
+that reads datasets from different text formats, and applies a set of different SML algoritms on the read data.
 
 The program is implemented in python 2.7.5, and it makes use of the SML algorithms implemented in
 the scikit-learn library \cite{scikit-learn}. Most of the numerical handling and statistical tests

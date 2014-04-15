@@ -3,8 +3,8 @@
 
 The hyperparameter optimization and model selection process was run on a number of datasets that
 include 29 standard datasets commonly used in the machine learning community, and 8 datasets taken from
-biological experiments. The datasets were also analyzed under the default settings for all SML
-algorithms.
+biological experiments. The performance of the SML algorithms under default settings was also
+computed for each dataset.
 
 The SML algorithms applied on the datasets were:
 
@@ -172,5 +172,5 @@ The bottom row of Figure \ref{fig:learned_gamma} shows the learned general prior
 hyperparameter $\gamma$ when used in combination with a \emph{sigmoid} kernel. In this case, the evaluation of the
 hyperparameter on the large group of datasets seems to achieve better performance when small
 values (close to zero) are used, although the assignment of values away from zero is also allowed.
-This skewness of the learned distribution, when using a sigmoid kernel, may be used when looking for
+This skewness of the learned distribution, when using a sigmoid kernel, may be exploited when looking for
 optimal values of $\gamma$ on other datasets, as a suggestion of where to look first.
