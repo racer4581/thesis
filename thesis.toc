@@ -46,5 +46,7 @@
 \contentsline {subsubsection}{Support for various dataset formats}{36}{section.6.1}
 \contentsline {subsubsection}{Usability improvements}{36}{section.6.1}
 \contentsline {chapter}{\numberline {A}Hyperparameter hierarchy example}{37}{appendix.A}
-\contentsline {chapter}{Bibliography}{40}{appendix*.19}
-\contentsline {chapter}{Declaration of Originality}{41}{section*.20}
+\contentsline {chapter}{\numberline {B}Supervised machine learning algorithms}{39}{appendix.B}
+\contentsline {chapter}{\numberline {C}Datasets}{41}{appendix.C}
+\contentsline {chapter}{Bibliography}{44}{appendix*.19}
+\contentsline {chapter}{Declaration of Originality}{45}{section*.20}
