@@ -2,39 +2,37 @@
 
 This work shows that an automatic approach to hyperparameter optimization and model selection is
 very valuable, especially when little knowledge of the internal function and configuration options of
-the SML algorithms is
-available. The optimized configurations retrieved by the implementation of this method significantly
-boosted the predictive power of most SML algorithms over their defaults, while considering other
-preferable criteria such as the runtime, stability of the scores, and predictive generalization to unseen
-instances.
+the SML algorithms is available. The optimized configurations retrieved by out approach
+significantly boosted the predictive power of most SML algorithms over their defaults. Moreover,
+the models optimized and selected by our method consider other preferable criteria such as the
+runtime, stability of the scores, and predictive generalization to unseen instances.
 
-Furthermore, the mostly automated procedure described here is very convenient for non-expert users,
-as using this implementation requires training in machine learning that does not go
-beyond the general concepts. The current implementation is already a valuable tool that brings SML
-algorithms closer to the untrained user, and narrows an existing gap between the purely-technical
+Furthermore, the automated procedure described here is very convenient for non-experts,
+as using this method requires training in machine learning that does not go
+beyond the general concepts. Our method is already a valuable tool that brings SML
+algorithms closer to the untrained user, and narrows the gap between the purely-technical
 machine learning community and the vast range of other disciplines that might benefit from SML
 techniques.
 
 An important consideration regarding the optimization process is that, since the optimization
 happens simultaneously on a large group of numerical hyperparameters, finding good combinations of
-hyperparameters may be a slow process. The choice of a optimization method that makes use of the
+hyperparameters may be a slow process. The choice of an optimization method that makes use of the
 optimization history and other hints to guide the sampling of candidate configurations is critical
-when the time budget is a concern.
+when time is a concern.
 
 \section{Future work}
-	Many possibilities to extend this work are considered, and planned to implement. The most important ones are
+	Many possibilities to extend this work are considered, and planned. The most important ones are
 	described next.
 
 	\subsubsection{Optimization methods}
-	Implementing better optimization methods to is the obvious next step. Optimization methods such
-	as simulated annealing or genetic algorithms may speed up the hyperparameter optimization or
-	enforce a guided exploration of the hyperparameter space. Other methods may be implemented in
-	the future.
+	Implementing more sophisticated optimization methods to is the obvious next step. Optimization methods such
+	as simulated annealing or genetic algorithms may speed up the hyperparameter optimization. Other
+	methods such as may be implemented in the future.
 
 	\subsubsection{Data preprocessing}
 	In most real-world applications, the raw data obtained from experiments is not immediately suitable for
-	training SML algorithms. Data with high dimensionality (many features) usually requires heavier computation to
-	process, and the large number of dimensions can make a very informative signal (i.e., a
+	training SML algorithms. Data with high dimensionality (many features) usually requires lots of
+	computational resources, and the large number of dimensions can make a very informative signal (i.e., a
 	dimension or group of dimensions that correlate well with the labeling) difficult to detect among
 	all the rest of non-informative dimensions.
 	
@@ -63,11 +61,3 @@ when the time budget is a concern.
 	weights misclassifications accordingly. All the metrics that evaluate the quality of the
 	prediction in terms of the true or false positives and negatives should use those weights in
 	their internal computations.
-
-	\subsubsection{Support for various dataset formats}
-	At the moment only \texttt{.arff} files are supported.
-
-	\subsubsection{Usability improvements}
-	While a graphical user interface, as well as a command line interface, is provided for
-	interaction with the optimization, model selection, and the final suggestion of a model, further
-	improvements on such interfaces must be made.

@@ -43,10 +43,8 @@
 \contentsline {subsubsection}{Data preprocessing}{38}{section.6.1}
 \contentsline {subsubsection}{Dataset classification}{38}{section.6.1}
 \contentsline {subsubsection}{Custom penalization of misclassifications}{38}{section.6.1}
-\contentsline {subsubsection}{Support for various dataset formats}{38}{section.6.1}
-\contentsline {subsubsection}{Usability improvements}{38}{section.6.1}
 \contentsline {chapter}{\numberline {A}Hyperparameter hierarchy example}{39}{appendix.A}
 \contentsline {chapter}{\numberline {B}Supervised machine learning algorithms}{41}{appendix.B}
 \contentsline {chapter}{\numberline {C}Datasets}{43}{appendix.C}
-\contentsline {chapter}{Bibliography}{46}{appendix*.18}
-\contentsline {chapter}{Declaration of Originality}{47}{section*.19}
+\contentsline {chapter}{Bibliography}{46}{appendix*.17}
+\contentsline {chapter}{Declaration of Originality}{47}{section*.18}

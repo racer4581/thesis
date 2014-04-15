@@ -62,7 +62,9 @@ strictly depends on the dataset.
 Standard datasets are commonly used for testing and evaluating machine learning approaches. Some of
 the datasets used here are inherently difficult to classify, and hence most SML algorithms
 consistently obtain a very low performance index; other datasets are simple to classify and hence
-good performance indices but little relative improvement over the default values is expected.
+good performance indices are expected. Since good predictions may also be obtained by using the
+default values, little relative improvement (of the best model over the default values) is also
+expected.
 
 Figure \ref{img:optvsdefstandard} shows an example of the distribution of performance indices for
 different models, and their shift with respect to the performance indices obtained by the default
@@ -113,46 +115,63 @@ since the stability of the performance index is one of the criteria considered f
 The 29 standard machine learning datasets were used to learn general priors for all numerical
 hyperparameters on all SML algorithms, as explained in \ref{sec:learning_prior}. 
 
-The learned distributions encode the detected regions with good hyperparameter values. In many cases
-there is no clear agreement on the regions where useful values of the hyperparameter lie, and hence
-the learned distribution assigns relatively similar density to the whole hyperparameter domain.
-Using such a learned prior is roughly equivalent to using a uniform distribution.
+The learned distributions present more density in the regions of the hyperparameter space that
+consistently produce good results over different datasets. In many cases there is no clear agreement
+on the regions where useful values of the hyperparameter lay, and hence the learned distribution
+assigns relatively similar density to the whole hyperparameter domain.  Using such a learned prior
+is roughly equivalent to using a uniform distribution.
 
 Since different combinations of categorical variables define different contexts that might change
 the semantics of the numerical hyperparameter, general prior distributions are learned independently
 for each categorical context.
 
 As an example, we present the learned distributions of the hyperparameter $\gamma$ for two different
-kernels used by a support vector machine classifier.
+kernels used by a support vector machine classifier. Plots of the learned distributions are
+shown in Figure \ref{fig:learned_gamma}
 
-The distributions learned by analyzing the values of $\gamma$ for a polynomial kernel, shown in
-Figure \ref{fig:learned_gamma1}, look similar, regardless of the value of other categorical
-hyperparameters. Both distributions shown assign a rather uniform density over the entire (0,1)
-domain, and no important improvement in the optimization process should be expected when such
+\begin{figure}
+	\begin{minipage}[t]{.48\textwidth}
+		\centering
+		\footnotesize class\_weight:\emph{auto}, kernel:{\bf \emph{poly}}, shrinking:\emph{True}
+		\includegraphics[width=\linewidth]{learned1}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{.48\textwidth}
+		\centering
+		\footnotesize class\_weight:\emph{auto}, kernel:{\bf \emph{poly}}, shrinking:\emph{False}
+		\includegraphics[width=\linewidth]{learned2}
+	\end{minipage}
+	\vskip0.6cm
+	\begin{minipage}[t]{.48\textwidth}
+		\centering
+		\footnotesize class\_weight:\emph{auto}, kernel:{\bf \emph{sigmoid}}, shrinking:\emph{True}
+		\includegraphics[width=\linewidth]{learned3}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{.48\textwidth}
+		\centering
+		\footnotesize class\_weight:\emph{auto}, kernel:{\bf \emph{sigmoid}}, shrinking:\emph{False}
+		\includegraphics[width=\linewidth]{learned4}
+	\end{minipage}
+	\caption[Learned general priors]{Distributions of the $\gamma$ hyperparameter learned from the performance indices over
+	a large group of datasets. The title over each plot indicates the signature of the categorical context (i.e., the values of the
+	categorical hyperparameters).} \label{img:learned1}
+	\label{fig:learned_gamma}
+\end{figure}
+
+As evidenced in the plots, some categorical hyperparameters may or may not influence the distribution of
+the numerical hyperparameters. The value of the \emph{shrinking} hyperparameter in this case does
+not significantly alter the distribution of $\gamma$.
+
+The distributions learned by analyzing the values of $\gamma$ for a \emph{polynomial} kernel, shown in
+the top row of Figure \ref{fig:learned_gamma}, look similar, regardless of the value of other categorical
+hyperparameters. Both distributions assign a rather uniform density over the entire (0,1)
+domain. No important improvement in the optimization process should be expected when such
 distribution is used as a general prior.
 
-Figure \ref{fig:learned_gamma2} shows the learned general prior for the same numerical
-hyperparameter $\gamma$ when used with a sigmoid kernel. In this case, the evaluation of the
-hyperparameter on the large group of datasets seems to usually achieve better performance when small
-values (close to zero) are used, althought the assignment of values away from zero is also allowed.
+The bottom row of Figure \ref{fig:learned_gamma} shows the learned general prior for the same numerical
+hyperparameter $\gamma$ when used in combination with a \emph{sigmoid} kernel. In this case, the evaluation of the
+hyperparameter on the large group of datasets seems to achieve better performance when small
+values (close to zero) are used, although the assignment of values away from zero is also allowed.
 This skewness of the learned distribution, when using a sigmoid kernel, may be used when looking for
 optimal values of $\gamma$ on other datasets, as a suggestion of where to look first.
-
-\begin{figure}
-	\centering
-	\includegraphics[width=.3\textwidth]{learned1}
-	\includegraphics[width=.3\textwidth]{learned2}
-	\caption[Uninformative learned general priors]{Distributions of the $\gamma$ hyperparameter learned from the performance indices over
-	a large group of datasets. The context gamma for signature auto\_sigmoid\_False} \label{img:learned1}
-	\label{fig:learned_gamma1}
-\end{figure}
-
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.3\textwidth]{learned3}
-	\includegraphics[width=.3\textwidth]{learned4}
-	\caption[Informative learned general priors]{gamma for signature auto\_poly\_False}
-	\label{fig:learned_gamma2}
-\end{figure}
-
