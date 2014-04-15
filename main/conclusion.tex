@@ -1,7 +1,73 @@
 \chapter{Conclusion}
 
-\lipsum[7]
+This work shows that an automatic approach to hyperparameter optimization and model selection is
+very valuable, especially when little knowledge of the internal function and configuration options of
+the SML algorithms is
+available. The optimized configurations retrieved by the implementation of this method significantly
+boosted the predictive power of most SML algorithms over their defaults, while considering other
+preferable criteria such as the runtime, stability of the scores, and predictive generalization to unseen
+instances.
+
+Furthermore, the mostly automated procedure described here is very convenient for non-expert users,
+as using this implementation requires training in machine learning that does not go
+beyond the general concepts. The current implementation is already a valuable tool that brings SML
+algorithms closer to the untrained user, and narrows an existing gap between the purely-technical
+machine learning community and the vast range of other disciplines that might benefit from SML
+techniques.
+
+An important consideration regarding the optimization process is that, since the optimization
+happens simultaneously on a large group of numerical hyperparameters, finding good combinations of
+hyperparameters may be a slow process. The choice of a optimization method that makes use of the
+optimization history and other hints to guide the sampling of candidate configurations is critical
+when the time budget is a concern.
 
 \section{Future work}
+	Many possibilities to extend this work are considered, and planned. The most important ones are
+	described next.
 
-\lipsum[21]
+	\subsubsection{Optimization methods}
+	Implementing better optimization methods to is the obvious next step. Optimization methods such
+	as simulated annealing or genetic algorithms may speed up the hyperparameter optimization or
+	enforce a guided exploration of the hyperparameter space. Other methods may be implemented in
+	the future.
+
+	\subsubsection{Data preprocessing}
+	In most real-world applications, the raw data obtained from experiments is not immediately suitable for
+	training SML algorithms. Data with high dimensionality (many features) usually requires heavier computation to
+	process, and the large number of dimensions can make a very informative signal (i.e., a
+	dimension or group of dimensions that correlate well with the labeling) difficult to detect among
+	all the rest of non-informative dimensions.
+	
+	Feature selection and dimensionality reduction techniques should be included as a preprocessing
+	step. The decision on which dimensionality reduction to use can also be regarded as a
+	categorical hyperparameter of the model selection process, and included as part of the final
+	suggestion of a best model.
+
+	\subsubsection{Dataset classification}
+	Having a framework that automatically finds the best model for specific data might be used on a
+	larger scale to infer patterns between dataset-wide features and the SML algorithms that best
+	predict on them. Approaches such as the one presented in \cite{tatti2007distances}, where a
+	distance metric between two datasets is suggested, can be further investigated. Finding
+	dataset-wide features that follow patterns according to the SML algorithms best suited for them
+	might also be used as a first clue of what SML algorithms could work well on a specific dataset.
+
+	%Non-homogeneous scaling of the features may cause
+	%for certain algorithms to erroneously assume some features more relevant than others. Some
+	%features may only significantly contribute to a good signal for discrimination when combined
+	%with others.
+
+
+	\subsubsection{Custom penalization of misclassifications}
+	Some misclassifications may be more tolerable than others, for data of a certain nature.
+	Penalization of misclassifications can be modified by using a custom confusion matrix that
+	weights misclassifications accordingly. All the metrics that evaluate the quality of the
+	prediction in terms of the true or false positives and negatives should use those weights in
+	their internal computations.
+
+	\subsubsection{Support for various dataset formats}
+	At the moment only \texttt{.arff} files are supported.
+
+	\subsubsection{Usability improvements}
+	While a graphical user interface, as well as a command line interface, is provided for
+	interaction with the optimization, model selection, and the final suggestion of a model, further
+	improvements on such interfaces must be made.

@@ -11,6 +11,11 @@ Bergstra, J., Bardenet, R., Bengio, Y., K{\'e}gl, B., et~al. (2011).
 \newblock Algorithms for hyper-parameter optimization.
 \newblock In {\em NIPS}, volume~24, pages 2546--2554.
 
+\bibitem[Bergstra and Bengio, 2012]{bergstra2012random}
+Bergstra, J. and Bengio, Y. (2012).
+\newblock Random search for hyper-parameter optimization.
+\newblock {\em The Journal of Machine Learning Research}, 13:281--305.
+
 \bibitem[Declercq and Piater, 2007]{declercq2007online}
 Declercq, A. and Piater, J.~H. (2007).
 \newblock On-line simultaneous learning and tracking of visual feature graphs.
@@ -36,6 +41,15 @@ Fisher, R.~A. (1925).
 Gonnet, G.~H., Scholl, R., and Stevenson, D.~E. (2010).
 \newblock {\em {Scientific Computation}}, volume~63.
 
+\bibitem[Hunter, 2007]{matplotlib}
+Hunter, J.~D. (2007).
+\newblock Matplotlib: A 2d graphics environment.
+\newblock {\em Computing In Science \& Engineering}, 9(3):90--95.
+
+\bibitem[Jones et~al., 2001]{scipy}
+Jones, E., Oliphant, T., Peterson, P., et~al. (2001).
+\newblock {SciPy}: Open source scientific tools for {Python}.
+
 \bibitem[Kohavi et~al., 1995]{kohavi1995cv}
 Kohavi, R. et~al. (1995).
 \newblock A study of cross-validation and bootstrap for accuracy estimation and
@@ -46,6 +60,14 @@ Kohavi, R. et~al. (1995).
 Parzen, E. et~al. (1962).
 \newblock On estimation of a probability density function and mode.
 \newblock {\em Annals of mathematical statistics}, 33(3):1065--1076.
+
+\bibitem[Pedregosa et~al., 2011]{scikit-learn}
+Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel,
+  O., Blondel, M., Prettenhofer, P., Weiss, R., Dubourg, V., Vanderplas, J.,
+  Passos, A., Cournapeau, D., Brucher, M., Perrot, M., and Duchesnay, E.
+  (2011).
+\newblock Scikit-learn: Machine learning in {P}ython.
+\newblock {\em Journal of Machine Learning Research}, 12:2825--2830.
 
 \bibitem[Pizarro et~al., 2002]{pizarro2002mct}
 Pizarro, J., Guerrero, E., and Galindo, P.~L. (2002).
@@ -62,5 +84,17 @@ Sheskin, D.~J. (2003).
 \newblock {\em Handbook of parametric and nonparametric statistical
   procedures}.
 \newblock crc Press.
+
+\bibitem[Tatti, 2007]{tatti2007distances}
+Tatti, N. (2007).
+\newblock Distances between data sets based on summary statistics.
+\newblock {\em The Journal of Machine Learning Research}, 8:131--154.
+
+\bibitem[Thornton et~al., 2013]{autoweka}
+Thornton, C., Hutter, F., Hoos, H.~H., and Leyton-Brown, K. (2013).
+\newblock Auto-weka: Combined selection and hyperparameter optimization of
+  classification algorithms.
+\newblock In {\em Proceedings of the 19th ACM SIGKDD international conference
+  on Knowledge discovery and data mining}, pages 847--855. ACM.
 
 \end{thebibliography}

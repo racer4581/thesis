@@ -42,12 +42,21 @@
 		information to predict the class $\class'$ of unseen instances from their feature values
 		$\feature'$.
 		\begin{equation}
+			\label{eq:sml_alg}
 			A \colon (\{(\feature, \class)\}, \{\feature'\}) \mapsto \{\class'\}
 		\end{equation}
 
 		\item
 		$\algoset = \{\algo^1, \ldots, \algo^k\}$ represents the set of all algorithms to evaluate.
 		
+		\item
+		An algorithm $\algo$ accepts a set of {\bf hyperparameters} $\paramset_\algo$ that modify
+		its behavior.
+
+		\item
+		$\paramval_a$ is the value of a {\bf hyperparameter} $a \in \paramset_\algo$ for some
+		algorithm $\algo$.
+
 		\item
 		$\param^i = (\paramval^i_a, \paramval^i_b, \paramval^i_c,\ldots)$ denotes a set of
 		hyperparameter values (or {\bf configuration}) for the $i$-th algorithm in $\algoset$.
@@ -97,14 +106,33 @@
 
 	\section{Related work}
 
-	A large number of model selection methods exist, most of which rely on statistical hypothesis
-	testing, where usually the \emph{model} refers to a probability distribution that describes a
-	set of data.
+	Few initiatives to address the model selection and hyperparameter optimization of SML algorithms
+	have been proposed. 
 
-	Auto-weka
+	For hyperparameter optimization, the \emph{de facto} method, known as \emph{grid search}, is the
+	exhaustive evaluation of a discretization of the hyperparameter space on a regularly-spaced grid. Such method is
+	affected by the \emph{curse of dimensionality} when a large number of hyperparameters needs to
+	be analyzed, and the step size for discretization is often decided arbitrarily.
+
+	Alternative methods to avoid these shortcomings have been proposed. The simplest of all consists
+	on randomly retrieving and evaluating values for the hyperparameters (\emph{random search}), and
+	is studied in the context of SML optimization in \cite{bergstra2012random}. This method is
+	obviously very slow as it relies only on chance to find good configurations. It does, however,
+	allow for a uniform exploration of the hyperparameter space.
+
+	A method based on hierarchical density estimation, and another method based on hierarchical
+	Gaussian processes, are proposed in \cite{bergstra2011hyperparameter}. These methods are limited
+	to the optimization of hyperparameter values from a single SML algorithm, and do not consider a
+	systematic selection of a model. Furthermore, the work lacks a statistical analysis of the
+	optimized hyperparameters, and disregards the generalization of the selected configuration to
+	unseen data.
+
+	The approach implemented in Auto-WEKA (\cite{autoweka}) does consider model selection and
+	hyperparameter optimization simultaneosly. Their work models the hyperparameter space in a
+	hierarchical way. Auto-WEKA considers generalization as the only criterion for both optimization and
+	model selection.
 	
-	Surprisingly, despite its importance, few initiatives to address the problem in the context of
-	machine learning have emerged.
-
-	Brief literature review. Bergstra's work \cite{bergstra2011hyperparameter} lacks the statistical
-	analysis, and package is cumbersome to use for a non-expert user
+	Statistical frameworks for model selection on SML are described in \cite{pizarro2002mct} and
+	\cite{demsar2006mct}, and some of their ideas have been implemented in the present work.
+	%Brief literature review. Bergstra's work \cite{bergstra2011hyperparameter} lacks the statistical
+	%analysis, and package is cumbersome to use for a non-expert user

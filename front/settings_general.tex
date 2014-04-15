@@ -6,13 +6,15 @@
 %		taken from http://phd.epfl.ch/files/content/sites/phd/files/shared/0%20Pages%20EDOC/Modeles_these/latex_template5_56.zip
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[a4paper,11pt,fleqn,draft]{book}
+\documentclass[a4paper,11pt,fleqn]{book}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{changepage}
 \usepackage{ifdraft}
+\usepackage{caption}
+
 \usepackage{tabularx, multirow}
 \setlength{\marginparwidth}{3cm}  % For todonotes to work properly
 \reversemarginpar
@@ -42,6 +44,8 @@
 
 \usepackage[final]{graphicx,xcolor}
 \graphicspath{{images/}}
+\captionsetup{font=footnotesize}
+
 
 \usepackage{subfig}
 \usepackage{booktabs}
@@ -53,6 +57,7 @@
 \usepackage{algorithm}
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
+\usepackage{qtree}
 
 \usepackage{fancyhdr}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}

@@ -3,9 +3,17 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces General methodology diagram}}{7}{figure.caption.6}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Hierarchical model selection}}{15}{figure.caption.10}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Distributions used to model hyperparameters\relax }}{9}{figure.caption.7}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Hyperparameter hierarchy example}}{12}{figure.caption.8}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Hierarchical model selection}}{19}{figure.caption.10}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Optimized vs default values for a standard machine learning dataset\relax }}{31}{figure.caption.13}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Optimized vs default values for a biological dataset\relax }}{32}{figure.caption.14}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces gamma for signature auto\_sigmoid\_True\relax }}{32}{figure.caption.15}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces learner distribution 2\relax }}{33}{figure.caption.16}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces gamma for signature auto\_sigmoid\_False\relax }}{33}{figure.caption.16}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces gamma for signature auto\_poly\_True\relax }}{33}{figure.caption.17}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces gamma for signature auto\_poly\_False\relax }}{33}{figure.caption.18}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
