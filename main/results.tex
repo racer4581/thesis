@@ -113,17 +113,37 @@ since the stability of the performance index is one of the criteria considered f
 The 29 standard machine learning datasets were used to learn general priors for all numerical
 hyperparameters on all SML algorithms, as explained in \ref{sec:learning_prior}. 
 
-The learned distributions encode the detected regions with good hyperparameter values. In many
-cases, such as the ones shown in figure \ref{fig:learned_gamma1}, 
-Gammas from poly approx uniform, gammas from sigmoid: skewed
+The learned distributions encode the detected regions with good hyperparameter values. In many cases
+there is no clear agreement on the regions where useful values of the hyperparameter lie, and hence
+the learned distribution assigns relatively similar density to the whole hyperparameter domain.
+Using such a learned prior is roughly equivalent to using a uniform distribution.
 
+Since different combinations of categorical variables define different contexts that might change
+the semantics of the numerical hyperparameter, general prior distributions are learned independently
+for each categorical context.
+
+As an example, we present the learned distributions of the hyperparameter $\gamma$ for two different
+kernels used by a support vector machine classifier.
+
+The distributions learned by analyzing the values of $\gamma$ for a polynomial kernel, shown in
+Figure \ref{fig:learned_gamma1}, look similar, regardless of the value of other categorical
+hyperparameters. Both distributions shown assign a rather uniform density over the entire (0,1)
+domain, and no important improvement in the optimization process should be expected when such
+distribution is used as a general prior.
+
+Figure \ref{fig:learned_gamma2} shows the learned general prior for the same numerical
+hyperparameter $\gamma$ when used with a sigmoid kernel. In this case, the evaluation of the
+hyperparameter on the large group of datasets seems to usually achieve better performance when small
+values (close to zero) are used, althought the assignment of values away from zero is also allowed.
+This skewness of the learned distribution, when using a sigmoid kernel, may be used when looking for
+optimal values of $\gamma$ on other datasets, as a suggestion of where to look first.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=.3\textwidth]{learned1}
 	\includegraphics[width=.3\textwidth]{learned2}
-	\caption{Distributions of the $\gamma$ hyperparameter learned from the performance indices over
-	a large group of datasets. gamma for signature auto\_sigmoid\_False} \label{img:learned1}
+	\caption[Uninformative learned general priors]{Distributions of the $\gamma$ hyperparameter learned from the performance indices over
+	a large group of datasets. The context gamma for signature auto\_sigmoid\_False} \label{img:learned1}
 	\label{fig:learned_gamma1}
 \end{figure}
 
@@ -132,7 +152,7 @@ Gammas from poly approx uniform, gammas from sigmoid: skewed
 	\centering
 	\includegraphics[width=0.3\textwidth]{learned3}
 	\includegraphics[width=.3\textwidth]{learned4}
-	\caption{gamma for signature auto\_poly\_False}
-	\label{img:learned4}
+	\caption[Informative learned general priors]{gamma for signature auto\_poly\_False}
+	\label{fig:learned_gamma2}
 \end{figure}
 

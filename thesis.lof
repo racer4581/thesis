@@ -11,8 +11,8 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Optimized vs default values for a standard machine learning dataset\relax }}{33}{figure.caption.14}
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Optimized vs default values for biological datasets of different sizes}}{34}{figure.caption.15}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Distributions of the $\gamma $ hyperparameter learned from the performance indices over a large group of datasets. gamma for signature auto\_sigmoid\_False\relax }}{35}{figure.caption.16}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces gamma for signature auto\_poly\_False\relax }}{35}{figure.caption.17}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Uninformative learned general priors}}{35}{figure.caption.16}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Informative learned general priors}}{35}{figure.caption.17}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
