@@ -45,9 +45,10 @@ for this. First, the models underlying various machine learning algorithms are v
 one another. In a simple example using toy data depicted in Figure \ref{fig:decision_boundaries}, the differences among 
 various machine learning methods are obvious. Some methods misclassify entire regions of the data,
 some perform well but generalize poorly (they overfit the data), and for some the decision boundary
-is not smooth leading to ambiguity in certain regions.  Some methods make assumptions on the
-structure of the data, and do not give accurate predictions when such assumptions are violated. The
-choice of the method to use is tied to the structure of the data that they are to predict.
+is not smooth leading to ambiguity in certain regions.  
+
+Unfortunately, there is no ``silver bullet'' machine learning algorithm that always performs well.  The choice of the method to use is tied to the structure of the data that they are to predict.  Some methods make assumptions on the
+structure of the data, and do not give accurate predictions when such assumptions are violated. Therefore, it is important to choose the most appropriate model for the data, otherwise performance will suffer. 
 
 \begin{figure}
 	\begin{minipage}{0.33\textwidth}
@@ -83,8 +84,7 @@ choice of the method to use is tied to the structure of the data that they are t
 		\footnotesize {\bf SVM}\\radial basis function - {\bf 100\%}
 		\includegraphics[width=\linewidth]{decision_boundaries6}
 	\end{minipage}
-	\caption[Decision boundaries for several different SML algorithms]{Decision boundaries for
-	several different SML algorithms applied to the \emph{two moon} dataset.}
+	\caption[Decision boundaries for several different SML algorithms]{Decision boundaries for 	several different supervised machine learning algorithms applied to the \emph{two moon} dataset. Inherent differences among the various models are reflected in their performance and the shape of the decision boundaries.}
 	\label{fig:decision_boundaries}
 \end{figure}
 
@@ -110,14 +110,17 @@ hyper-parameter tuning is more of an art than a science, and even machine learni
 carry out the tuning in an arbitrary or subjective way.
 
 
-\subsection{Our approach}
+\subsubsection{Our approach}
 
-%ROGER: I think we should restructure as follows. 1) describe the model selection problem. 2)
-%describe hyper-parameter tuning problem. 3) give an overview of our approach.
+We present an automatic solution to the combined model selection and hyper-parameter optimization problem. Model selection is the problem of determining which among a set of machine learning algorithms is the most well suited to the data, while hyper-parameter optimization searches for candidate hyper-parameter values expected to most improve the prediction of the SML algorithm.
 
-%Model selection is the problem of determining which among a set of machine learning algorithms is
-%the most well suited to the data. We approach it by evaluating of a series of candidate models in
+Our approach is to organize the various machine learning algorithms and their hyper-parameters into a large hierarchical space. At the lowest level of the hierarchy are the numeric hyper-parameters which contain values that must be set appropriately. Up the hierarchy we model conditional and categorical choices, which all belong to a single family of machine learning algorithms (support vector machines, for example). We use numeric optimization methods at the lowest level to choose the best numeric hyper-parameter values for a given categorical configuration. The candidate models compete against each other using statistical tests. The best candidates are promoted to the next level of the hierarchy. The process is repeated until ultimately a single model remains, chosen among the families of classifiers or regressors. 
+
+Our approach substantially improves the performance of machine learning algorithms over their default settings, as we demonstrate on classic machine learning datasets as well as biological data. Our analysis also recognizes that, in some cases, the difference between one or more candidate models is statistically insignificant. When this occurs, the user can specify alternative criteria to choose the best model such as ranking the model's speed, simplicity, or interpretability.
+
+
+%We approach it by evaluating of a series of candidate models in
 %order to select the best one, according to some optimality criteria. 
 
-%Numerical optimization approaches can be used to systematically suggest new candidate values
-%expected to improve the prediction of the SML algorithm.
+
+%We do this with priority in computational resources given to more promising categories. 
