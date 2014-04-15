@@ -34,9 +34,9 @@
 \contentsline {subsubsection}{Learned model simplification}{27}{equation.4.1.2}
 \contentsline {section}{\numberline {4.2}Using the general prior for hyperparameter optimization}{28}{section.4.2}
 \contentsline {chapter}{\numberline {5}Evaluation of results}{29}{chapter.5}
-\contentsline {section}{\numberline {5.1}Results on standard Machine Learning datasets}{29}{section.5.1}
-\contentsline {section}{\numberline {5.2}Results on biological data}{31}{section.5.2}
-\contentsline {section}{\numberline {5.3}General prior learning}{31}{section.5.3}
+\contentsline {section}{\numberline {5.1}Results on standard Machine Learning datasets}{30}{section.5.1}
+\contentsline {section}{\numberline {5.2}Results on biological data}{32}{section.5.2}
+\contentsline {section}{\numberline {5.3}General prior learning}{32}{section.5.3}
 \contentsline {chapter}{\numberline {6}Conclusion}{35}{chapter.6}
 \contentsline {section}{\numberline {6.1}Future work}{35}{section.6.1}
 \contentsline {subsubsection}{Optimization methods}{35}{section.6.1}

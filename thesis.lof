@@ -10,7 +10,7 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Optimized vs default values for a standard machine learning dataset\relax }}{31}{figure.caption.13}
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Optimized vs default values for a biological dataset\relax }}{32}{figure.caption.14}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces gamma for signature auto\_sigmoid\_True\relax }}{32}{figure.caption.15}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces gamma for signature auto\_sigmoid\_True\relax }}{33}{figure.caption.15}
 \contentsline {figure}{\numberline {5.4}{\ignorespaces learner distribution 2\relax }}{33}{figure.caption.16}
 \contentsline {figure}{\numberline {5.5}{\ignorespaces gamma for signature auto\_sigmoid\_False\relax }}{33}{figure.caption.16}
 \contentsline {figure}{\numberline {5.6}{\ignorespaces gamma for signature auto\_poly\_True\relax }}{33}{figure.caption.17}
