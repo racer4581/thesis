@@ -38,28 +38,26 @@ Name & Description\\
 
 
 \texttt{KNN} & $k$-nearest neighbors classifier.\\
-\texttt{RadiusNeighbors} & Neighbors within a radius. \\
+\texttt{RadiusNeighbors} & Votes among neighbors within a certain radius. \\
 \texttt{NearestCentroid} & Assigns the class of the centroid of the nearest cluster.\\
-\texttt{StochasicGradientDescent} & Stochastic Gradient Descent classifier\\
-\texttt{LogisticRegression} & Logistic function applied on a linearly combined features\\
+\texttt{StochasicGradientDescent} & Stochastic Gradient Descent classifier.\\
+\texttt{LogisticRegression} & Logistic function applied on a linear combination of features.\\
 \texttt{SVM} & Support Vector Machine (libSVM implementation).\\
 \texttt{LinearSVM} & Linear SVM (libLinear implementation).\\
-\texttt{NuSVM} & Nu-Support Vector Machine\\
+\texttt{NuSVM} & Nu-Support Vector Machine.\\
 \texttt{DecisionTree} & Decision tree classification.\\
 \texttt{RandomForest} & Average of multiple decision trees on subsets of the data.\\
 \texttt{ExtraTreeEnsemble} & Random forest with randomized decision trees.\\
-\texttt{Ridge} & Ridge regression.\\
+\texttt{Ridge} & Least squares regression with L2 loss.\\
 \texttt{LinearDiscriminant} & Linear discriminant analysis.\\
 \texttt{QuadraticDiscriminant} & Quadratic discriminant analysis.\\
-\texttt{GradientBoosting} & Uses an ensemble of weak classifiers.\\
+\texttt{GradientBoosting} & An ensemble of regression tree classifiers.\\
 \texttt{PassiveAggressive} & Passive Aggressive classifier.\\
 \texttt{GaussianNB} & Gaussian Na\"ive Bayes classifier\\
 \end{tabularx}
 
 
 \chapter{Datasets}
-
-The following datasets were used in the analysis of results:
 
 \begin{tabularx}{\textwidth}{X r r r}
 \bf Standard datasets& \bf Instances & \bf Features & \bf Classes\\
@@ -94,7 +92,11 @@ vehicle & 946 & 18 & 4\\
 vowel & 990 & 14 & 11 \\
 waveform-5000 & 5000 & 21 & 3\\
 wine & 178 & 13 & 3 \\
-\bf Biological datasets & & & \\
+\end{tabularx}
+\clearpage
+
+\begin{tabularx}{\textwidth}{X r r r}
+\bf Biological datasets& \bf Instances & \bf Features & \bf Classes\\
 \hline
 HK2\_Standardized & 1441 & 25 & 6 \\
 Huotari500\_Standardized & 502 & 25 & 4 \\
