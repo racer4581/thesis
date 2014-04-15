@@ -4,49 +4,49 @@
 \contentsline {chapter}{List of figures}{viii}{chapter*.3}
 \contentsline {chapter}{List of tables}{ix}{chapter*.4}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
-\contentsline {subsubsection}{Supervised machine learning approaches}{1}{chapter.1}
 \contentsline {subsubsection}{Model selection}{2}{chapter.1}
-\contentsline {subsubsection}{Hyperparameter optimization}{2}{chapter.1}
-\contentsline {chapter}{\numberline {2}Problem description}{3}{chapter.2}
-\contentsline {section}{\numberline {2.1}Formal definition}{3}{section.2.1}
-\contentsline {section}{\numberline {2.2}Related work}{5}{section.2.2}
-\contentsline {chapter}{\numberline {3}Methodology}{7}{chapter.3}
-\contentsline {section}{\numberline {3.1}Hyperparameter space modeling}{8}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Hyperparameter distributions}{8}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Hyperparameter hierarchy}{10}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}Sampling the hyperparameter space}{12}{subsection.3.1.3}
-\contentsline {section}{\numberline {3.2}Model performance measurement}{13}{section.3.2}
-\contentsline {section}{\numberline {3.3}Model validation}{15}{section.3.3}
-\contentsline {section}{\numberline {3.4}Optimization}{16}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Random search}{16}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {3.4.2}Shrinking hypercube}{17}{subsection.3.4.2}
-\contentsline {subsection}{\numberline {3.4.3}Parametric density optimization}{18}{subsection.3.4.3}
-\contentsline {section}{\numberline {3.5}Model evaluation and selection}{18}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Candidate model filtering}{19}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Statistical analysis}{20}{subsection.3.5.2}
-\contentsline {subsection}{\numberline {3.5.3}Ranking criteria}{21}{subsection.3.5.3}
-\contentsline {subsection}{\numberline {3.5.4}The model selection algorithm}{23}{subsection.3.5.4}
-\contentsline {section}{\numberline {3.6}Implementation details}{24}{section.3.6}
-\contentsline {chapter}{\numberline {4}Hyperparameter distribution learning}{25}{chapter.4}
-\contentsline {subsubsection}{Parametric vs non-parametric modeling of the general prior distribution}{25}{chapter.4}
-\contentsline {section}{\numberline {4.1}Learning the general prior distribution}{26}{section.4.1}
-\contentsline {subsubsection}{Learned model update}{26}{algorithm.4}
-\contentsline {subsubsection}{Learned model simplification}{27}{equation.4.1.2}
-\contentsline {section}{\numberline {4.2}Using the general prior for hyperparameter optimization}{28}{section.4.2}
-\contentsline {chapter}{\numberline {5}Evaluation of results}{29}{chapter.5}
-\contentsline {section}{\numberline {5.1}Results on standard Machine Learning datasets}{30}{section.5.1}
-\contentsline {section}{\numberline {5.2}Results on biological data}{32}{section.5.2}
-\contentsline {section}{\numberline {5.3}General prior learning}{32}{section.5.3}
-\contentsline {chapter}{\numberline {6}Conclusion}{35}{chapter.6}
-\contentsline {section}{\numberline {6.1}Future work}{35}{section.6.1}
-\contentsline {subsubsection}{Optimization methods}{35}{section.6.1}
-\contentsline {subsubsection}{Data preprocessing}{36}{section.6.1}
-\contentsline {subsubsection}{Dataset classification}{36}{section.6.1}
-\contentsline {subsubsection}{Custom penalization of misclassifications}{36}{section.6.1}
-\contentsline {subsubsection}{Support for various dataset formats}{36}{section.6.1}
-\contentsline {subsubsection}{Usability improvements}{36}{section.6.1}
-\contentsline {chapter}{\numberline {A}Hyperparameter hierarchy example}{37}{appendix.A}
-\contentsline {chapter}{\numberline {B}Supervised machine learning algorithms}{39}{appendix.B}
-\contentsline {chapter}{\numberline {C}Datasets}{41}{appendix.C}
-\contentsline {chapter}{Bibliography}{44}{appendix*.19}
-\contentsline {chapter}{Declaration of Originality}{45}{section*.20}
+\contentsline {subsubsection}{Hyperparameter optimization}{2}{figure.caption.6}
+\contentsline {subsection}{\numberline {1.0.1}Our approach}{3}{subsection.1.0.1}
+\contentsline {chapter}{\numberline {2}Problem description}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Formal definition}{5}{section.2.1}
+\contentsline {section}{\numberline {2.2}Related work}{7}{section.2.2}
+\contentsline {chapter}{\numberline {3}Methodology}{9}{chapter.3}
+\contentsline {section}{\numberline {3.1}Hyperparameter space modeling}{10}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Hyperparameter distributions}{10}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Hyperparameter hierarchy}{12}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Sampling the hyperparameter space}{14}{subsection.3.1.3}
+\contentsline {section}{\numberline {3.2}Model performance measurement}{15}{section.3.2}
+\contentsline {section}{\numberline {3.3}Model validation}{17}{section.3.3}
+\contentsline {section}{\numberline {3.4}Optimization}{18}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Random search}{18}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Shrinking hypercube}{19}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}Parametric density optimization}{20}{subsection.3.4.3}
+\contentsline {section}{\numberline {3.5}Model evaluation and selection}{20}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Candidate model filtering}{21}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Statistical analysis}{22}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}Ranking criteria}{23}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3.5.4}The model selection algorithm}{25}{subsection.3.5.4}
+\contentsline {section}{\numberline {3.6}Implementation details}{26}{section.3.6}
+\contentsline {chapter}{\numberline {4}Hyperparameter distribution learning}{27}{chapter.4}
+\contentsline {subsubsection}{Parametric vs non-parametric modeling of the general prior distribution}{27}{chapter.4}
+\contentsline {section}{\numberline {4.1}Learning the general prior distribution}{28}{section.4.1}
+\contentsline {subsubsection}{Learned model update}{28}{algorithm.4}
+\contentsline {subsubsection}{Learned model simplification}{29}{equation.4.1.2}
+\contentsline {section}{\numberline {4.2}Using the general prior for hyperparameter optimization}{30}{section.4.2}
+\contentsline {chapter}{\numberline {5}Evaluation of results}{31}{chapter.5}
+\contentsline {section}{\numberline {5.1}Results on standard Machine Learning datasets}{32}{section.5.1}
+\contentsline {section}{\numberline {5.2}Results on biological data}{34}{section.5.2}
+\contentsline {section}{\numberline {5.3}General prior learning}{34}{section.5.3}
+\contentsline {chapter}{\numberline {6}Conclusion}{37}{chapter.6}
+\contentsline {section}{\numberline {6.1}Future work}{37}{section.6.1}
+\contentsline {subsubsection}{Optimization methods}{37}{section.6.1}
+\contentsline {subsubsection}{Data preprocessing}{38}{section.6.1}
+\contentsline {subsubsection}{Dataset classification}{38}{section.6.1}
+\contentsline {subsubsection}{Custom penalization of misclassifications}{38}{section.6.1}
+\contentsline {subsubsection}{Support for various dataset formats}{38}{section.6.1}
+\contentsline {subsubsection}{Usability improvements}{38}{section.6.1}
+\contentsline {chapter}{\numberline {A}Hyperparameter hierarchy example}{39}{appendix.A}
+\contentsline {chapter}{\numberline {B}Supervised machine learning algorithms}{41}{appendix.B}
+\contentsline {chapter}{\numberline {C}Datasets}{43}{appendix.C}
+\contentsline {chapter}{Bibliography}{46}{appendix*.18}
+\contentsline {chapter}{Declaration of Originality}{47}{section*.19}

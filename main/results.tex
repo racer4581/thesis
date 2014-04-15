@@ -40,16 +40,8 @@ performance indices under the default configurations. A few datasets did not sho
 the default settings. In these cases, the best classification performance was obtained by using the
 LinearDiscriminant classifier, which does not expose any hyperparameters to configure.
 
-The table shows that the SML algorithm that performs best and improvement over the default settings stictly
-depends on the dataset.
-
-%\begin{figure}
-%	\begin{centering}
-%		\includegraphics[width=\textwidth]{optimized_vs_default}
-%	\end{centering}
-%	\caption{blablabla}
-%\end{figure}
-%
+The table shows that the SML algorithm that performs best and improvement over the default settings
+strictly depends on the dataset.
 
 \begin{table}[h!]
 \centering
@@ -70,15 +62,16 @@ depends on the dataset.
 Standard datasets are commonly used for testing and evaluating machine learning approaches. Some of
 the datasets used here are inherently difficult to classify, and hence most SML algorithms
 consistently obtain a very low performance index; other datasets are simple to classify and hence
-good performance indices but little improvement over the default values is expected.
+good performance indices but little relative improvement over the default values is expected.
 
 Figure \ref{img:optvsdefstandard} shows an example of the distribution of performance indices for
 different models, and their shift with respect to the performance indices obtained by the default
-models, for a specific dataset. Each row in the plot corresponds to a different algorithm under the
-default (thin boxplots) and optimized settings. Distributions that are not significantly different
-from the best, up to a level $\alpha$ shown on the title of the plot, are highlighted. The p-values
-reported by the statistical test are displayed on the right side of the plot. Models with p-values
-above the $\alpha$ level are considered statistically indistinguishable.
+models, for a specific standard dataset. Each row in the plot corresponds to a different algorithm
+under the default and optimized settings (thin and thick boxplots, respectively). Distributions that
+are not significantly different from the best, up to a confidence level $\alpha$ shown on the title of the
+plot, are highlighted in blue. The p-values reported by the statistical test are displayed on the right side
+of the plot. Models with p-values above the $\alpha$ level are considered statistically
+indistinguishable from one another.
 
 The baseline is shown as a vertical dotted line. It is possible for some models to score lower than the
 baseline, as explained in section \ref{sec:performance_measurement}.
@@ -86,7 +79,7 @@ baseline, as explained in section \ref{sec:performance_measurement}.
 In cases where algorithms do not work at all on a given dataset, their performance indices are
 reported as a single point over the baseline.
 
-\begin{figure}[h!]
+\begin{figure}[t!]
 	\centering
 	\includegraphics{optimized_vs_default_standard}
 	\caption{Optimized vs default values for a standard machine learning dataset}
@@ -98,49 +91,48 @@ reported as a single point over the baseline.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics{optimized_vs_default_bio}
-	\caption{Optimized vs default values for a biological dataset}
+	\includegraphics[width=.49\textwidth]{optimized_vs_default_bio1}
+	\includegraphics[width=.49\textwidth]{optimized_vs_default_bio2}
+	\caption[Optimized vs default values for biological datasets of different sizes]{Optimized vs
+	default values for biological datasets of different sizes. The colonTumor dataset contains 62
+	instances, whereas the WildMain500\_Standarized dataset contains 500 instances.}
 	\label{img:optvsdefbio}
 \end{figure}
+
+Similar results are obtained when the method is applied on biological datasets. Figure
+\ref{img:optvsdefbio} shows the distribution of performance indices for different SML algorithms
+applied on a small dataset (62 instances), and a larger dataset (500 instances). A large spread of
+the scores is due precisely to the dataset size, as can be immediately noticed when comparing
+both plots. The variance of the candidate models is in general
+smaller than the variance of the performance indices from the default configuration. In particular,
+the models statistically indistinguishable from the best exhibit a smaller variance than the rest,
+since the stability of the performance index is one of the criteria considered for model selection.
 
 \section{General prior learning}
 
 The 29 standard machine learning datasets were used to learn general priors for all numerical
 hyperparameters on all SML algorithms, as explained in \ref{sec:learning_prior}. 
 
+The learned distributions encode the detected regions with good hyperparameter values. In many
+cases, such as the ones shown in figure \ref{fig:learned_gamma1}, 
 Gammas from poly approx uniform, gammas from sigmoid: skewed
 
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=.3\textwidth]{learned1}
-	\caption{gamma for signature auto\_sigmoid\_True}
-	\label{img:learned1}
-\end{figure}
-
-
-\begin{figure}[h!]
-	\centering
 	\includegraphics[width=.3\textwidth]{learned2}
-	\caption{learner distribution 2}
-	\caption{gamma for signature auto\_sigmoid\_False}
-	\label{img:learned2}
+	\caption{Distributions of the $\gamma$ hyperparameter learned from the performance indices over
+	a large group of datasets. gamma for signature auto\_sigmoid\_False} \label{img:learned1}
+	\label{fig:learned_gamma1}
 \end{figure}
 
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.3\textwidth]{learned3}
-	\caption{gamma for signature auto\_poly\_True}
-	\label{img:learned3}
-\end{figure}
-
-
-\begin{figure}[h!]
-	\centering
 	\includegraphics[width=.3\textwidth]{learned4}
 	\caption{gamma for signature auto\_poly\_False}
 	\label{img:learned4}
 \end{figure}
-
 

@@ -1,20 +1,18 @@
 \select@language {english}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Decision boundaries for several different SML algorithms}}{2}{figure.caption.6}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces General methodology diagram}}{7}{figure.caption.6}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Distributions used to model hyperparameters\relax }}{9}{figure.caption.7}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Hyperparameter hierarchy example}}{12}{figure.caption.8}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Hierarchical model selection}}{19}{figure.caption.10}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces General methodology diagram}}{9}{figure.caption.7}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Distributions used to model hyperparameters\relax }}{11}{figure.caption.8}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Hyperparameter hierarchy example}}{14}{figure.caption.9}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Hierarchical model selection}}{21}{figure.caption.11}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Optimized vs default values for a standard machine learning dataset\relax }}{31}{figure.caption.13}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Optimized vs default values for a biological dataset\relax }}{32}{figure.caption.14}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces gamma for signature auto\_sigmoid\_True\relax }}{33}{figure.caption.15}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces learner distribution 2\relax }}{33}{figure.caption.16}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces gamma for signature auto\_sigmoid\_False\relax }}{33}{figure.caption.16}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces gamma for signature auto\_poly\_True\relax }}{33}{figure.caption.17}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces gamma for signature auto\_poly\_False\relax }}{33}{figure.caption.18}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Optimized vs default values for a standard machine learning dataset\relax }}{33}{figure.caption.14}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Optimized vs default values for biological datasets of different sizes}}{34}{figure.caption.15}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Distributions of the $\gamma $ hyperparameter learned from the performance indices over a large group of datasets. gamma for signature auto\_sigmoid\_False\relax }}{35}{figure.caption.16}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces gamma for signature auto\_poly\_False\relax }}{35}{figure.caption.17}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
