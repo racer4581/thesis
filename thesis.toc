@@ -35,16 +35,15 @@
 \contentsline {section}{\numberline {4.2}Using the general prior for hyperparameter optimization}{30}{section.4.2}
 \contentsline {chapter}{\numberline {5}Evaluation of results}{31}{chapter.5}
 \contentsline {section}{\numberline {5.1}Results on standard Machine Learning datasets}{32}{section.5.1}
-\contentsline {section}{\numberline {5.2}Results on biological data}{34}{section.5.2}
-\contentsline {section}{\numberline {5.3}General prior learning}{34}{section.5.3}
+\contentsline {section}{\numberline {5.2}Results on biological data}{33}{section.5.2}
+\contentsline {section}{\numberline {5.3}General prior learning}{33}{section.5.3}
 \contentsline {chapter}{\numberline {6}Conclusion}{37}{chapter.6}
 \contentsline {section}{\numberline {6.1}Future work}{37}{section.6.1}
 \contentsline {subsubsection}{Optimization methods}{37}{section.6.1}
 \contentsline {subsubsection}{Data preprocessing}{38}{section.6.1}
 \contentsline {subsubsection}{Dataset classification}{38}{section.6.1}
 \contentsline {subsubsection}{Custom penalization of misclassifications}{38}{section.6.1}
-\contentsline {chapter}{\numberline {A}Hyperparameter hierarchy example}{39}{appendix.A}
-\contentsline {chapter}{\numberline {B}Supervised machine learning algorithms}{41}{appendix.B}
-\contentsline {chapter}{\numberline {C}Datasets}{43}{appendix.C}
-\contentsline {chapter}{Bibliography}{46}{appendix*.17}
-\contentsline {chapter}{Declaration of Originality}{47}{section*.18}
+\contentsline {chapter}{\numberline {A}Supervised machine learning algorithms}{39}{appendix.A}
+\contentsline {chapter}{\numberline {B}Datasets}{41}{appendix.B}
+\contentsline {chapter}{Bibliography}{44}{appendix*.17}
+\contentsline {chapter}{Declaration of Originality}{45}{section*.18}

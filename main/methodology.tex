@@ -1,14 +1,14 @@
 \chapter{Methodology}
 	The specific implemented approach to find solutions for equation \ref{eq:problem} is explained
 	in detail in this chapter. Important components of the solution described here include the
-	modeling of the hyperparameter space and its sampling, the choice of the numerical optimization
+	modeling of the hyperparameter space, how to sample from the hyperparameter space, the choice of the numerical optimization
 	method, and the definition of the target function to optimize, among others.
 
 	The general strategy followed here is summarized in figure \ref{fig:generalapproach}:
 
 	\begin{figure}[here]
 		\begin{center}
-			\includegraphics[width=\textwidth]{optimization_and_model_selection}
+			\includegraphics[width=1.04\textwidth]{optimization_and_model_selection}
 		\end{center}
 		\caption[General methodology diagram]{Interaction between different components of the
 		implemented hyperparameter optimization and model selection approach.}
@@ -16,14 +16,14 @@
 	\end{figure}
 
 
-	The entire process is subdivided in two stages. The instances contained in the dataset
+	The entire process is divided in two stages. The instances contained in the dataset
 	$\alldata$ are divided into two subsets $\selectionset$ and $\holdoutset$. The {\bf
-	hyperparameter optimization stage} evaluates a large number of models (SML algorithm under a
+	hyperparameter optimization stage} explores and evaluates a large number of models (SML algorithm under a
 	given configuration) on the subset $\selectionset$, in order to find the ones that exhibit the best
-	predictive performance. The {\bf model selection stage} analyzes the selected models obtained
+	predictive performance. The {\bf model selection stage} analyzes the most promising models obtained
 	from the hyperparameter optimization stage (candidates) under the subset $\holdoutset$ (data unseen to the
-	optimization process), to assess
-	generalization, and uses that information, along with other desirable properties of the models,
+	optimization process). To assess
+	generalization, it uses that information, along with other desirable properties of the models,
 	to systematically rule out suboptimal models and finally return the best.
 
 
@@ -33,9 +33,7 @@
 	internal behavior, which can be further adjusted to fit specific needs. For example, algorithms
 	that make use of the distance between examples in feature space might accept a distance metric
 	to be specified, or algorithms that internally create trees might allow the user to specify a
-	branching factor (maximum number of branches per node), and so on. Since SML algorithms accept
-	a set of example instances for training and unseen data for predicton as \emph{parameters} 
-	(equation \ref{eq:sml_alg}), and since the configuration options control the behavior of the
+	branching factor (maximum number of branches per node), and so on. Since the configuration options control the behavior of the
 	algorithm, they are regarded to as \emph{hyperparameters} of the SML algorithm. The choice of
 	hyperparameter values for a SML algorithm can heavily impact its predictive power.
 
@@ -48,7 +46,7 @@
 	control the values to use for the specific implementation of internal formulas needed for
 	prediction, such as the number of neighbors for k-neighbors classification, or the cost
 	parameter used by a support vector machine as a trade-off between allowing training errors and
-	fitting the support vectors to the training set rigidly.
+	rigidly fitting the support vectors to the training set.
 
 	Other considerations such as restricting the value of a numerical hyperparameter to a fixed
 	range (addressed here by assigning validation rules for each numerical hyperparameter), or
@@ -61,7 +59,8 @@
 	Since one of the main objectives of this work is to learn the behavior of SML algorithms under
 	different settings, a systematic way of obtaining valid candidate configurations for performance
 	evaluation is required. In order to achieve this, each hyperparameter is regarded as a random
-	variable and a distribution for its specific type is assigned to it.
+	variable and an appropriate distribution modeling the likelihood of obtaining good performance
+	for a given value is assigned to it.
 
 	A one-dimensional distribution is used to sample values for each hyperparameter
 	independently. Section \ref{ssec:hyp_hierarchy} describes in detail how dependencies between
@@ -75,7 +74,8 @@
 
 	\begin{figure}[t]
 		\includegraphics[width=\textwidth]{fig_dist}
-		\caption{Distributions used to model hyperparameters}
+		\caption[Distributions used to model hyperparameters]{Distributions used to model
+		hyperparameters.}
 		\label{img:distributions}
 	\end{figure}
 
@@ -110,7 +110,7 @@
 		\begin{equation}
 			p(x) = \frac 1 {x\sqrt{2\pi}\sigma} e^ \frac{-(\ln x - \mu)^2} {2\sigma^2}
 		\end{equation}
-		\item {\bf Gaussian Mixture Models} (GMMs) are used for continuous hyperparameters that are
+		\item {\bf Gaussian Mixture Models} (GMMs) are used for more complicated continuous hyperparameters that are
 		known to be multimodal.
 		\begin{align}
 			p(x) &= \sum_{i=1}^N \pi_i \mathcal{N}(\mu_i, \sigma_i),&\sum_{i=1}^N \pi_i = 1
@@ -124,9 +124,10 @@
 
 	The values for the category weights, means, variances, and bounds, depend on how each specific
 	hyperparameter is used by the SML algorithm. By default, handcrafted distributions have been designed
-	led by interpretation of the documentation of each SML algorithm, but can be later modified. For
+	led by interpretation of the documentation of each SML algorithm, but can be modified by the
+	user. For
 	instance, a hyperparameter that, according to the documentation, is used by the implementation
-	of the SML algorithm as a ratio, will be assigned a Uniform(0,1) distribution by default, but if the
+	of the SML algorithm as a relative weight, will be assigned a Uniform(0,1) distribution by default, but if the
 	documentation suggests that values around 0.5 often yield good results, a gaussian distribution
 	centered at 0.5 is assigned instead. The parameters for all distributions for all
 	hyperparameters are stored as plain text in a configuration file, and can be manually edited if
@@ -137,9 +138,9 @@
 	For most SML algorithm implementations, choosing specific values for some hyperparameters may
 	change which other hyperparameters are also used or ignored, and how they are used by the
 	algorithm. For instance, the SVM family of algorithms can use linear,
-	polynomial, sigmoid, or RBF kernels, and if a polynomial kernel is chosen, it is possible to
+	polynomial, sigmoid, or RBF kernels. If a polynomial kernel is chosen, it is possible to
 	specify its polynomial degree; such option has no effect when a linear kernel is used. Likewise,
-	it is possible to specify the intependent term for the polynomial and sigmoid functions used as
+	it is possible to specify the independent term for the polynomial and sigmoid functions used as
 	kernels, and such value may have a different impact and different extrema depending on which
 	kernel they operate on. The popular SVM implementation libSVM accepts a single hyperparameter
 	\texttt{coef0} for this setting. Disregarding the duality of this hyperparameter and its
@@ -148,7 +149,7 @@
 
 	What the above example implies is that it is mandatory to consider each hyperparameter for
 	optimization within a context given by the values of other hyperparameters (the {\bf
-	hyperparameter context}). A hierarchical design is chosen, based on two observations:
+	hyperparameter context}). We have chosen a hierarchical design, based on two observations:
 	\begin{enumerate}
 		\item
 		Hyperparameter contexts can be nested. The use and semantics of a hyperparameter may depend
@@ -177,7 +178,7 @@
 	are used only to guide the hierarchical hyperparameter sampling and validation, and should be
 	removed from the configuration before passing it to the SML algorithm.
 
-	The two observations indicated above allow to encode the entire hyperparameter space for a SML
+	Following these observations, it is possible to encode the entire hyperparameter space for a SML
 	algorithm into a tree structure that models the hierarchical dependences between sets of
 	hyperparameters. The top nodes of the tree refer to categorical hyperparameters that do not
 	depend on the values of others, and each category creates a new hyperparameter context (branch)
@@ -249,13 +250,13 @@
 	\label{fig:tree_example}
 	\end{figure}
 
-	The whole model selection process can be viewed as an extension of the hyperparameter hierarchy,
+	The whole model selection process can be viewed as the top level of the hyperparameter hierarchy,
 	where the set of all SML algorithms $\algoset$ to analyze corresponds to a categorical
 	hyperparameter of the model selection. Each top-level branch contains the hierarchy (subtree)
 	for all the different configurations for a specific type of algorithm (the {\bf algorithm
 	family}).
 
-	{\bf Note:} For simplicity, the solution has been designed under the assumption that numerical
+	For simplicity, the solution has been designed under the assumption that numerical
 	hyperparameters are independent of each other. Modeling dependences between numerical
 	hyperparameters is outside the scope of this work, as it would require to model all the
 	hyperparameters belonging to the same signature in the hierarchy as a single multidimensional
@@ -396,7 +397,7 @@
 		\label{tb:metrics}
 	\end{table}
 
-	Different metrics may adopt values from different ranges, and the interpretation of the
+	The output of these various metrics may take different ranges of values, and the interpretation of the
 	actual values might also differ from metric to metric. As an example, the accuracy of a
 	prediction is measured in the range between 0 and 1, and a \emph{greater} value means a better
 	prediction. The mean squared error is measured as a positive value, and a \emph{lower} value means a
@@ -431,10 +432,10 @@
 	By default, the performance index used here combines the accuracy, the F$_\beta$ score, the
 	Brier score, and the Matthews correlation coefficient. These metrics have some properties that
 	make them suitable for a wide range of situations. The accuracy offers a very intuitive
-	evaluation of the quality of the prediction, the F$_\beta$ score allows for tuning of the relative
+	evaluation of the quality of the prediction. The F$_\beta$ score allows for tuning of the relative
 	importance of the recall with respect to the precision, which might be useful depending on the
-	needs of the user, the Brier score takes the probability estimates into account and therefore
-	deals with ambiguity in the classification in a more fair way, the Matthews correlation
+	needs of the user. The Brier score takes the probability estimates into account and therefore
+	deals with ambiguity in the classification in a more fair way. The Matthews correlation
 	coefficient is a balanced metric suitable for classes with very different relative frequency.
 
 	While encoding metrics into a one-dimensional performance index may hide important details of
@@ -448,7 +449,7 @@ Using a model validation protocol is important because it reduces the risk of ov
 the particularities of the training set, and hence is a first step to promote generalization of the
 model to unseen data.
 The performance index calculated by equation \ref{eq:performance_index} maps each model to a single
-numerical value that represents its ability to correctly predict classes on a very specific set of training
+numerical value that represents its ability to correctly predict classes on a specific set of training
 and testing instances. In order to assess the predictive quality of the model in a more general
 setup, repeated rounds of \emph{stratified $k$-fold cross-validation} are carried out. 
 
@@ -460,7 +461,7 @@ means here that the folds are enforced to all have the same proportion of exampl
 In most applications, a single repetition of 10-fold cross-validation is used, the scores obtained
 for each fold are averaged out and used as a single score. This means that, for each fold,
 the model is trained with 90\% of the data and tested against the remaining 10\%.
-\cite{kohavi1995cv} justifies the choice of $k=10$ as the smallest number of folds with "acceptable"
+The analysis by Kohavi (\cite{kohavi1995cv}) justifies the choice of $k=10$ as the smallest number of folds with "acceptable"
 bias. The actual number of repetitions and folds used in this work is exposed as a parameter that
 can be customized at will.
 
@@ -469,6 +470,7 @@ selection stage, since a more limited number of candidate configurations will be
 because a statistical analysis is to be performed on the distribution of results, a larger number of
 evaluations for each model can and should be obtained. Normality of the distribution of scores is assumed.
 Performing 3 repetitions of 10-fold cross-validation is suggested, to comply with the rule of thumb
+(derived from the central limit theorem)
 of using a sample size of at least 30 samples to estimate a normal distribution.
 
 \section{Optimization}
@@ -484,10 +486,11 @@ and genetic algorithms could also be used. The framework described here assumes 
 optimization method returns candidate configurations, and can be fed with their evaluation results
 in order to train itself if needed.
 
-The valid optimization methods work on the numerical dimensions of the hyperparameter space
-only. This is particularly convenient because most current optimization methods are purely
-numerical, and the current design does not impose any further restrictions or special handling of
-the non-numerical dimensions, which removes the need for specially designed optimization methods.
+The optimization methods work on the numerical dimensions of the hyperparameter space
+only. This is particularly convenient because most current optimization methods are not capable of
+handling hierarchical, conditional and categorical spaces. Since the proposed strategy does not impose
+any further restrictions or special handling of the non-numerical dimensions, there is no need for
+specially designed optimization methods.
 
 The optimization stage is restricted by a fixed time budget, shared across all the SML algorithms.
 
@@ -504,7 +507,7 @@ components of the configuration.
 
 Random search does not need to keep track of the evaluated model history or the retrieved scores,
 since every draw of hyperparameter values is independent of all the previous ones. As a consequence,
-random search is a very slow and expensive optimization method. Random search is, however, very
+random search is a very slow and expensive optimization method. Random search is, however, 
 useful when a more thorough exploration of the hyperparameter space is required, as it gives any
 possible configuration the same chance to be drawn.
 
@@ -561,8 +564,8 @@ hyperparameter space is presented in detail in chapter \ref{ch:learn}.
 
 The distributions for all hyperparameters are estimated automatically, by running the optimization
 process on a large set of standard datasets using random search to explore the hyperparameter space.
-The results of all the datasets are used to fit gaussian mixtures that encode the high and
-low-scoring regions for each hyperparameter. The gaussian mixtures returned by this process will replace
+The results of all the datasets are used to fit Gaussian mixtures that encode the high and
+low-scoring regions for each hyperparameter. The Gaussian mixtures returned by this process will replace
 the default distributions that represent each hyperparameter.
 
 \section{Model evaluation and selection}
@@ -596,16 +599,16 @@ figure \ref{img:tree}.
 \end{figure}
 
 \subsection{Candidate model filtering}
-The optimization stage will mostly retrieve models with high performance indices. Most optimization
-techniques try to find local optima, and as a consequence, they might end up testing a large number
+The optimization stage will mostly retrieve models with good scores because optimization
+techniques try to find local optima. As a consequence, they might end up testing a large number
 of configurations close to each optimum. This means that the distribution of hyperparameter values
 sampled and evaluated by the optimization stage will tend to have more density around the different
-local maxima found. A clustering approach is used here to remove redundant configurations and only retrieve
+local maxima found. A clustering approach is used to remove redundant configurations and only retrieve
 high-scoring configurations from different local maxima. This avoids overrepresentation of
 configurations from a single hill in the score landscape and returns a small number of
-configurations that represent more homogeneously the regions that yield good scores.
+configurations that represent the regions that yield good scores more homogeneously.
 
-Clustering the evaluated configurations with the {\bf $k$-means} algorithm is used here to retrieve
+We apply clustering on the evaluated configurations with the {\bf $k$-means} algorithm to retrieve
 $k$ clusters of configurations, and choose the configuration with the highest score from each cluster as
 one of the candidate configurations that will represent a specific numerical hyperparameter space.
 The number of means has been arbitrarily chosen to $k = 10$ by default but can be modified via a

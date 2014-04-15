@@ -2,7 +2,7 @@
 
 	This work aims to propose a solution for a two-fold problem: find the SML algorithm that works
 	best for a given set of data, and find which particular choice of configuration settings for
-	that algorithm, if required, yields the best results.
+	that algorithm yields the best results.
 	
 	Although both sides of the problem correspond conceptually to different ideas (general approach
 	the former, fine-tunning the latter), they are intrinsically linked and should not be treated as
@@ -11,8 +11,7 @@
 	appropriated SML method, applied on the same data.
 
 	The formal description of the problem presented here is given in terms of the classification
-	problem. This description extends naturally to the regression problem, but the specific
-	terminology for regression has been excluded for the sake of brevity.
+	problem, but this description extends naturally to the regression problem.
 
 	\section{Formal definition}
 
@@ -20,7 +19,7 @@
 
 	\begin{itemize}
 		\item
-		An {\bf instance} is a representation of an object, encoded as a pair $(\feature, \class)$,
+		An {\bf instance} is data representing a single example, often an object. It is encoded as a pair $(\feature, \class)$,
 		with $\feature$ a vector of values for attributes (also called \emph{features}) related to
 		the object, and $\class$ a mapping of the object to its corresponding class.
 		
@@ -66,12 +65,12 @@
 		{\bf hyperparameter~space} of the $i$-th algorithm).
 
 		\item
-		An algorithm $\algo$ under a specific configuration $\param$ is called a {\bf model}, and
+		A realization of algorithm $\algo$ under a specific configuration $\param$ is called a {\bf model}, and
 		represented as $\algo_{\param}$.
 
 		\item
-		The {\bf scoring} function $\Score$ measures how good a model $\algo_{\param}$ is at
-		predicting the class of unseen instances drawn from the dataset
+		The {\bf scoring} function $\Score$ measures the predictive performance of a model $\algo_{\param}$ 
+		on unseen instances drawn from the dataset
 		$\alldata$.
 		\begin{equation}
 			\Score \colon \algo^i \in \algoset, \param^i \in \paramspace^i, \alldata \mapsto
@@ -98,7 +97,7 @@
 	equation~\ref{eq:problem} is the general form of the optimization process, and as such, only
 	defines the structure and general behavior of the different components of the optimization. In
 	practice, additional details such as the implementation of the scoring function, and the actual
-	exploration of the (possibly infinite) hyperparameter spaces, must be considered.
+	exploration of the hyperparameter spaces, must be considered.
 
 	Furthermore, the assumption that a single model $\algo^*_{\param^*}$ will be \emph{significantly} better than the
 	rest is not guaranteed, and hence returning multiple models as the result of the
@@ -110,9 +109,10 @@
 	have been proposed. 
 
 	For hyperparameter optimization, the \emph{de facto} method, known as \emph{grid search}, is the
-	exhaustive evaluation of a discretization of the hyperparameter space on a regularly-spaced grid. Such method is
+	exhaustive evaluation of a discretization of the hyperparameter space on a regularly-spaced
+	grid. This approach is
 	affected by the \emph{curse of dimensionality} when a large number of hyperparameters needs to
-	be analyzed, and the step size for discretization is often decided arbitrarily.
+	be analyzed. Furthermore, the step size for discretization is often decided arbitrarily.
 
 	Alternative methods to avoid these shortcomings have been proposed. The simplest of all consists
 	on randomly retrieving and evaluating values for the hyperparameters (\emph{random search}), and
@@ -124,10 +124,10 @@
 	Gaussian processes, are proposed in \cite{bergstra2011hyperparameter}. These methods are limited
 	to the optimization of hyperparameter values from a single SML algorithm, and do not consider a
 	systematic selection of a model. Furthermore, the work lacks a statistical analysis of the
-	optimized hyperparameters, and disregards the generalization of the selected configuration to
+	optimized hyperparameters, and does not properly consider the generalization of the selected configuration to
 	unseen data.
 
-	The approach implemented in Auto-WEKA (\cite{autoweka}) does consider model selection and
+	The very recent approach implemented in Auto-WEKA (\cite{autoweka}) does consider model selection and
 	hyperparameter optimization simultaneosly. Their work models the hyperparameter space in a
 	hierarchical way. Auto-WEKA considers generalization as the only criterion for both optimization and
 	model selection.
