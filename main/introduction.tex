@@ -1,58 +1,37 @@
 \chapter{Introduction}
 
-Automatic data processing and analysis is nowadays essential in many disciplines in science and
-beyond. The unmatched availability of computational resources experienced in present times has
-stimulated the stablishment of new disciplines that strongly depend on analysis of massive amounts
-of data, for which humans are no longer suitable, which makes automatic processing by computational
-methods paramount.
+Automatic data processing and analysis is essential in many scientific disciplines and commercial applications. The ever-increasing availability of computational resources experienced in recent years has stimulated the establishment of new disciplines that strongly depend on analysis massive amounts of data. The complexity and scale of the data means that analysis by hand is often impractical or even impossible. Therefore automatic processing by computational methods are of paramount importance.
 
-A clear example of this is found in biology. Methods such as \emph{genome-wide association
-studies}, \emph{high-content screening}, or \emph{gene expression profiling} are relatively new, and
-rely on the analysis of huge amounts of data that would not have been possible in the past.
+A clear example of this is found in biology. Methods to automate data acquisition have given rise to powerful new techniques such as \emph{genome-wide association studies}, \emph{high-content screening}, and \emph{gene expression profiling}. These techniques collect vast amounts of data that must be carefully analyzed -- a task which would have been impossible to do by hand, just a few years ago.
 
-Machine learning is a very popular approach to automatic data processing. Machine learning is a
-branch of artificial intelligence that allows to describe and detect patterns in groups of objects
-that can be later used for recognition of other objects with similar characteristics.
+Recently, machine learning has become an essential step in the analysis process of many such techniques.  Machine learning is a popular approach to automatic data processing and pattern recognition that learns a predictive model from example data. Later, the predictive model can be applied to new data for recognition or to make predictions. It is now common practice to use machine learning to perform the analysis of many biological data sets because it is faster, more accurate, and less biased than manual analysis.
 
-Machine learning methods that infer such patterns by studying a set of labeled (training) data are
-known as {\bf \emph{supervised} machine learning algorithms}, as opposite to \emph{unsupervised} machine
-learning methods, which are not exposed to any training information. 
-Supervised machine learning techniques are the most widely used.
+Machine learning methods can be broadly categorized as either \emph{supervised} or \emph{unsupervised}. Supervised methods are the more widely used of the two. They infer a predictive model by detecting patterns in a set of labeled example data provided to the algorithm. Unsupervised methods are designed to work without any training information. Clustering methods are a typical example of unsupervised learning. 
+
+In this work, we focus on supervised machine learning (SML) methods, which are designed to address two families of problems: classification and regression. In the {\bf classification} problem, instances of data (or objects) are said to belong to a class from a given set of classes. The task is to assign unseen instances to the appropriate class. The {\bf regression} problem attempts to fit a model to observed data in order to quantify the relationship between two groups of variables, \emph{predictors} and \emph{responses}. The fitted model can be used to describe the relationship between the two groups, or to predict new response values based on the predictor values.
 
 % Talk about learning and prediction 
 
-However, since many such methods exist, it is usually not obvious which one to use to address a specific
-problem, i.e., which method recognizes patterns that serve as a good \emph{model} of the data.
-Furthermore, each different method usually exposes configuration options that modify its behavior and
-may enhance or harm its predictive capacity.
-
-\subsubsection{Supervised machine learning approaches}
-
-	Supervised machine learning (SML) methods address two families of problems: classification and
-	regression. In the {\bf classification} problem, objects belong to a class from a given set, and
-	the method should infer rules to assign new objects to their corresponding class. The {\bf
-	regression} problem locates objects in a certain space, and should correctly predict the
-	location of new objects.  % position?
 
 \subsubsection{Model selection}
-	Different SML methods use different strategies to learn the patterns
-	that they use for prediction. Some of them make assumptions on the structure of the data, and
-	do not give accurate predictions when such assumptions are violated. The choice of the method to
-	use is bound to the structure of the data that they are to predict.
 
-	The model selection problem is the evaluation of a series of candidate models in order to select
-	the best one, according to some optimality criterion. The underlying rule learned by a SML
-	algorithm, and used by it to map objects to values, is considered as a model of the object
-	space. To select a SML model then means to evaluate a group of SML algorithms in order to choose
-	the one that best maps objects to their target values.
+Although many SML methods exist, it is usually not obvious which one to use. Choosing the best algorithm for a particular problem can be difficult, even for an expert. There are several reasons for this. First, the models underlying various machine learning algorithms are very different from one another. In a simple example using toy data depicted in Figure XX, the differences among various various machine learning methods are obvious. Some methods misclassify entire regions of the data, some perform well but generalize poorly (they overfit the data), and for some the decision boundary is not smooth leading to ambiguity in certain regions.  Some methods make assumptions on the structure of the data, and do not give accurate predictions when such assumptions are violated. The choice of the method to use is tied to the structure of the data that they are to predict.
+
+
+
+%The underlying rules learned by a SML algorithm, and used by it to map objects to values, is considered as a model of the object space. To select a SML model then means to evaluate a group of SML algorithms in order to choose the one that best maps objects to their target values.
 
 \subsubsection{Hyperparameter optimization}
-	Specific configuration options for each SML method control its internal behavior,
-	and can affect the learning of patterns to use for prediction. Finding the right combination of
-	configuration options (\emph{hyperparameters}) might be as critical to the prediction as
-	selecting the right machine learning method.
 
-	An exhaustive evaluation of all possible hyperparameter combinations is not practical, and it is
-	not even possible when any of the hyperparameters adopts values from a continuous range.
-	Numerical optimization approaches can be used to systematically suggest new candidate values
-	expected to improve the prediction of the SML algorithm.
+\emph{Hyper-parameters} present a further complication to the problem. Most machine learning algorithms contain hyper-parameters, external settings left to be tuned by the user (as opposed to parameters, which are optimized internally within the algorithm). These hyper-parameter settings, such as the cost of a support vector machine (SVM) or the number of neighbors $k$ in $k$-nearest neighbors (KNN), control the SMLs internal behavior and can affect its ability to  learn patterns to use for prediction. Finding the right combination of (\emph{hyper-parameters}) values may be as critical to good prediction as selecting the right machine learning method.
+
+The space of possible hyper-parameters can be quite large. One common implementation of an SVM requires the user to choose among 64 distinct categories of models, and then to set between 2 to 4 numeric values for each category. In many cases an exhaustive evaluation of all possible hyper-parameter combinations is not practical, and it is often not even possible. In practice, hyper-parameter tuning is more of an art than a science, and even machine learning experts often carry out the tuning in an arbitrary or subjective way.
+
+
+\subsection{Our approach}
+
+ROGER: I think we should restructure as follows. 1) describe the model selection problem. 2) describe hyper-parameter tuning problem. 3) give an overview of our approach.
+
+Model selection is the problem of determining which among a set of machine learning algorithms is the most well suited to the data. We approach it by evaluating of a series of candidate models in order to select the best one, according to some optimality criteria. 
+
+Numerical optimization approaches can be used to systematically suggest new candidate values expected to improve the prediction of the SML algorithm.
